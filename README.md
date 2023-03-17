@@ -3,4 +3,4 @@
 # Instala Node.JS
 # npm init
 # npm install amqplib
-# npm instal nodemailer
+# npm install nodemailer
