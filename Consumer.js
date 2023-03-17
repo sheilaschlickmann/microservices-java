@@ -35,7 +35,7 @@ amqp.connect({
                             to: 'silva.christian@gmail.com',
                             subject: 'Notificação de Possível Desastre Natural',
                             html: '<h1>Aviso Urgente!!!</h1> <p>Notificação de possível incidente!</p>',
-                            text: 'Aviso Urgente, Notificação de possível incidente!',
+                            text: 'Aviso Urgente, Notificação de possível incidente!' + mensagem.content.toString(),
                         })
                             .then(() => console.log('Email enviado com sucesso!'))
                             .catch((err) => console.log('Erro ao enviar Email: ', err))
