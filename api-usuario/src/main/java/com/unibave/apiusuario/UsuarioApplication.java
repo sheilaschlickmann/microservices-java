@@ -10,12 +10,12 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 public class UsuarioApplication extends Application {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
-            emf = Persistence.createEntityManagerFactory("GG");
+            emf = Persistence.createEntityManagerFactory("UsuariosBanco");
             em = emf.createEntityManager();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -27,5 +27,5 @@ public class UsuarioApplication extends Application {
                 em.close();
             }
         }
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
-@Transactional
+
 @ApplicationScoped
 public class UsuarioRepository {
         @PersistenceContext
