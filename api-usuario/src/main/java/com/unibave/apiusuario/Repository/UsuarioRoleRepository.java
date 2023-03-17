@@ -1,11 +1,11 @@
 package com.unibave.apiusuario.Repository;
 
 import com.unibave.apiusuario.Model.UsuarioRole;
-import jakarta.persistence.EntityManager;
-
+import javax.persistence.*;
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Transactional
 @ApplicationScoped
 public class UsuarioRoleRepository {
 
