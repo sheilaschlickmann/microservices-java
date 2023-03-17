@@ -5,21 +5,22 @@ import com.unibave.filaocorrencia.controller.converter.MapConverter;
 import com.unibave.filaocorrencia.model.OcorrenciaModel;
 import com.unibave.filaocorrencia.service.OcorrenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
-@RequestMapping("/ocorrencia")
+@RequestMapping(value = "/ocorrencia",produces = { "application/json" }, consumes = { "application/json" })
 public class OcorrenciaController {
     final OcorrenciaService ocorrenciaService;
 
@@ -27,18 +28,16 @@ public class OcorrenciaController {
     public OcorrenciaController(OcorrenciaService ocorrenciaService) {
         this.ocorrenciaService = ocorrenciaService;
     }
-
     @Autowired
     private ObjectMapper mapper;
 
     @Autowired
     private MapConverter mapConverter;
 
-
     /*@Autowired
     private RabbitTemplate rabbitTemplate;*/
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Object> saveOcorrencia(@RequestBody  Map<String, Object> OcorrenciaMap) {
 
@@ -47,24 +46,38 @@ public class OcorrenciaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ocorrenciaService.save(ocorrenciaConvertida));
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping
-    public ResponseEntity<Page<OcorrenciaModel>> getAllOcorrencias(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body((Page<OcorrenciaModel>) mapConverter.toJsonMap(ocorrenciaService.findAll(pageable)));
-    }
+    public ResponseEntity<List<OcorrenciaModel>> getAllOcorrencias() {
 
-    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneOcorrencia(@PathVariable(value = "id") Long id) {
-        Optional<OcorrenciaModel> occorenciaModelOptional = ocorrenciaService.findById(id);
-        if (!occorenciaModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ocorrencia não encontrada.");
+
+        List<OcorrenciaModel> ocorrenciaModelList = ocorrenciaService.findAll();
+
+        if (ocorrenciaModelList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            for (OcorrenciaModel ocorrencia : ocorrenciaModelList){
+                long id = ocorrencia.getId();
+                ocorrencia.add(linkTo(methodOn(OcorrenciaController.class).getOneOcorrencia(id)).withSelfRel());
+            }
+            return new ResponseEntity<List<OcorrenciaModel>>(ocorrenciaModelList,HttpStatus.OK);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(mapConverter.toJsonMap(occorenciaModelOptional.get()));
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping(value ="/{id}")
+    public ResponseEntity<Object> getOneOcorrencia(@PathVariable(value = "id") Long id) {
+        Optional<OcorrenciaModel> ocorrenciaModelOptional = ocorrenciaService.findById(id);
+        if (!ocorrenciaModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ocorrencia não encontrada.");
+        }else {
+            ocorrenciaModelOptional.get().add(linkTo(methodOn(OcorrenciaController.class).getAllOcorrencias()).withRel("Lista de Ocorrências"));
+            return ResponseEntity.status(HttpStatus.OK).body(mapConverter.toJsonMap(ocorrenciaModelOptional.get()));
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PatchMapping(value = "/{id}")
     public OcorrenciaModel updateOcorrenciaFields(@PathVariable Long id,@RequestBody Map<String, Object> fields){
         return ocorrenciaService.updateOcorrenciaByFields(id,fields);
     }

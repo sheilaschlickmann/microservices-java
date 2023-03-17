@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -18,7 +20,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @Entity
 @Table(name = "ocorrencia")
-public class OcorrenciaModel implements Serializable {
+public class OcorrenciaModel extends RepresentationModel<OcorrenciaModel> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +29,7 @@ public class OcorrenciaModel implements Serializable {
     private Long id;
 
     @Column
-    private int cpf;
+    private BigDecimal cpf;
 
     @Column
     private String nome;
@@ -56,7 +58,7 @@ public class OcorrenciaModel implements Serializable {
     private Date data_encerramento;
 
     @Column
-    private int usuario_atendimento;
+    private Long usuario_atendimento;
 
 
 

@@ -9,6 +9,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,8 +28,8 @@ public class OcorrenciaService {
         return ocorrenciaRepository.save(ocorrenciaModel);
     }
 
-    public Page<OcorrenciaModel> findAll(Pageable pageable) {
-        return ocorrenciaRepository.findAll(pageable);
+    public List<OcorrenciaModel> findAll() {
+        return ocorrenciaRepository.findAll();
     }
 
     public Optional<OcorrenciaModel> findById(Long id) {
