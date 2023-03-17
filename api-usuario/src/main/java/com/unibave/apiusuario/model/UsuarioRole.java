@@ -1,6 +1,6 @@
-package com.unibave.apiusuario.model;
+package com.unibave.apiusuario.Model;
 
-import com.unibave.apiusuario.enums.RoleName;
+import com.unibave.apiusuario.Enums.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

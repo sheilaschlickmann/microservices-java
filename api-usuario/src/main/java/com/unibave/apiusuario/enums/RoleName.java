@@ -1,4 +1,4 @@
-package com.unibave.apiusuario.enums;
+package com.unibave.apiusuario.Enums;
 
 public enum RoleName {
     ROLE_ADMIN,

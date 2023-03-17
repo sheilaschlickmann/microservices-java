@@ -1,4 +1,4 @@
-package com.unibave.apiusuario.model;
+package com.unibave.apiusuario.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

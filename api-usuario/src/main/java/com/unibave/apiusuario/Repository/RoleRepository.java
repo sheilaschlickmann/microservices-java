@@ -1,6 +1,6 @@
 package com.unibave.apiusuario.Repository;
 
-import com.unibave.apiusuario.model.Role;
+import com.unibave.apiusuario.Model.Role;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;

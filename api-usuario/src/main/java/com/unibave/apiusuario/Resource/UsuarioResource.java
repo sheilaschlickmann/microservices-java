@@ -1,7 +1,7 @@
 package com.unibave.apiusuario.Resource;
 
 import com.unibave.apiusuario.Repository.UsuarioRepository;
-import com.unibave.apiusuario.model.Usuario;
+import com.unibave.apiusuario.Model.Usuario;
 import jakarta.inject.Inject;
 
 import javax.enterprise.context.RequestScoped;

@@ -1,7 +1,7 @@
 package com.unibave.apiusuario.Resource;
 
 import com.unibave.apiusuario.Repository.RoleRepository;
-import com.unibave.apiusuario.model.Role;
+import com.unibave.apiusuario.Model.Role;
 import jakarta.inject.Inject;
 
 import javax.enterprise.context.RequestScoped;
