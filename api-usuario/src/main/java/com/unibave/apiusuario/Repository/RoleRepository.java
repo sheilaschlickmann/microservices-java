@@ -1,14 +1,13 @@
 package com.unibave.apiusuario.Repository;
 
 import com.unibave.apiusuario.Model.Role;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+
 import java.util.List;
 
-@Transactional
 @ApplicationScoped
 public class RoleRepository {
     @PersistenceContext

@@ -1,17 +1,14 @@
 package com.unibave.apiusuario.Repository;
 
 import com.unibave.apiusuario.Model.Usuario;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 
-@Transactional
 @ApplicationScoped
 public class UsuarioRepository {
         @PersistenceContext
