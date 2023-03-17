@@ -13,7 +13,7 @@ public class UsuarioApplication extends Application {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
-            emf = Persistence.createEntityManagerFactory("persistenceUnitName");
+            emf = Persistence.createEntityManagerFactory("postgres");
             em = emf.createEntityManager();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
