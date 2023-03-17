@@ -1,9 +1,14 @@
 package com.unibave.filaocorrencia.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unibave.filaocorrencia.controller.converter.MapConverter;
 import com.unibave.filaocorrencia.model.OcorrenciaModel;
 import com.unibave.filaocorrencia.service.OcorrenciaService;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,15 +39,24 @@ public class OcorrenciaController {
     @Autowired
     private MapConverter mapConverter;
 
-    /*@Autowired
-    private RabbitTemplate rabbitTemplate;*/
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<Object> saveOcorrencia(@RequestBody  Map<String, Object> OcorrenciaMap) {
+    public ResponseEntity<Object> saveOcorrencia(@RequestBody  Map<String, Object> OcorrenciaMap) throws JsonProcessingException {
 
         OcorrenciaModel ocorrenciaConvertida = mapper.convertValue(OcorrenciaMap, OcorrenciaModel.class);
         ocorrenciaConvertida.setData_ocorrencia(LocalDateTime.now(ZoneId.of("UTC")));
+        String rountingKey = "projeto-java";
+
+        String transactionJson = mapper.writeValueAsString(ocorrenciaConvertida);
+
+        Message message = MessageBuilder.withBody(transactionJson.getBytes())
+                .setContentType(MessageProperties.CONTENT_TYPE_JSON).build();
+
+        rabbitTemplate.convertAndSend(rountingKey, message);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(ocorrenciaService.save(ocorrenciaConvertida));
     }
 
