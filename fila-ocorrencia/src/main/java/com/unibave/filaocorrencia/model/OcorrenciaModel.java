@@ -41,6 +41,9 @@ public class OcorrenciaModel extends RepresentationModel<OcorrenciaModel> implem
     private String localizacao_ocorrencia;
 
     @Column
+    private String descricao_ocorrencia;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private SituacaoType situacao;
 
