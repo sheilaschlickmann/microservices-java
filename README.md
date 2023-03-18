@@ -1,7 +1,7 @@
 # Configurações
 
 ```python
-Apache TomEE WebProife 9
+Apache TomEE WebProfile 9
 
 Java 11 +
 
