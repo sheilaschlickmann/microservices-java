@@ -1,13 +1,11 @@
 package com.jakarta.usuarios.Repository;
 
 import com.jakarta.usuarios.Model.Usuario;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.*;
 import java.util.List;
 
-
-@ApplicationScoped
 public class UsuarioRepository {
         @PersistenceContext
         EntityManager em;

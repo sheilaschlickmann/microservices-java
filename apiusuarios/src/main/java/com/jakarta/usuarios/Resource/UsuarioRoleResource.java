@@ -2,16 +2,12 @@ package com.jakarta.usuarios.Resource;
 
 import com.jakarta.usuarios.Model.UsuarioRole;
 import com.jakarta.usuarios.Repository.UsuarioRoleRepository;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-
-@RequestScoped
 @Path("/usuario-role")
 public class UsuarioRoleResource {
-    @Inject
+
     UsuarioRoleRepository usuarioRoleRepository;
 
     @GET

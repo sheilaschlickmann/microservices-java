@@ -3,20 +3,21 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="UsuariosBanco">
+    <persistence-unit name="postgres" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>com.jakarta.usuarios.Model.Role</class>
+        <class>com.jakarta.usuarios.Model.UsuarioRole</class>
         <class>com.jakarta.usuarios.Model.Usuario</class>
-        <class>com.jakarta.usuarios.Model.UsuarioRole</class>
-        <class>com.jakarta.usuarios.Model.UsuarioRole</class>
 
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres" /> <!-- BD Mane -->
-            <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
-            <property name="javax.persistence.jdbc.password" value="admin" /> <!-- DB Password -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres" /> <!-- BD Mane -->
+            <property name="jakarta.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
+            <property name="jakarta.persistence.jdbc.password" value="admin" /> <!-- DB Password -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgresPlusDialect"/> <!-- DB Dialect -->
-            <property name="hibernate.hbm2ddl.auto" value="create" /> <!-- create / create-drop / update -->
             <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
             <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
         </properties>

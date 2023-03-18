@@ -2,12 +2,9 @@ package com.jakarta.usuarios.Repository;
 
 import com.jakarta.usuarios.Model.UsuarioRole;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.*;
-import javax.transaction.Transactional;
+import jakarta.persistence.*;
 import java.util.List;
-@Transactional
-@ApplicationScoped
+
 public class UsuarioRoleRepository {
 
     EntityManager em;

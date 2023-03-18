@@ -2,17 +2,12 @@ package com.jakarta.usuarios.Resource;
 
 import com.jakarta.usuarios.Model.Usuario;
 import com.jakarta.usuarios.Repository.UsuarioRepository;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-
-@RequestScoped
 @Path("/usuarios")
 public class UsuarioResource {
 
-    @Inject
     UsuarioRepository usuarioRepository;
 
     @GET

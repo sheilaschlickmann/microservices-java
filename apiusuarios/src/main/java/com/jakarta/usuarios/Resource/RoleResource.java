@@ -2,17 +2,13 @@ package com.jakarta.usuarios.Resource;
 
 import com.jakarta.usuarios.Model.Role;
 import com.jakarta.usuarios.Repository.RoleRepository;
-import org.springframework.web.context.annotation.RequestScope;
-
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
 @Path("/role")
 public class RoleResource {
 
-    @Inject
+
     RoleRepository roleRepository;
 
     @GET
