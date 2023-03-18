@@ -18,3 +18,6 @@ Configurar TomEE e colocar artefato
        <property name="jakarta.persistence.jdbc.user" value="XXXX" /> <!-- DB User -->
        <property name="jakarta.persistence.jdbc.password" value="XXXX" /> <!-- DB Password -->
 
+# Configuração Fila-ocorrência
+Java 17 +
+Instalar RabbitMQ e Erlang
