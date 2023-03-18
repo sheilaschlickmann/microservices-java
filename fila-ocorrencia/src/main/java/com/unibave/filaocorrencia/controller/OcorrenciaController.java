@@ -25,7 +25,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping(value = "/ocorrencia",produces = { "application/json" }, consumes = { "application/json" })
+@RequestMapping(value = "/ocorrencia",produces = { "application/json" })
 public class OcorrenciaController {
     final OcorrenciaService ocorrenciaService;
 
@@ -48,7 +48,7 @@ public class OcorrenciaController {
 
         OcorrenciaModel ocorrenciaConvertida = mapper.convertValue(OcorrenciaMap, OcorrenciaModel.class);
         ocorrenciaConvertida.setData_ocorrencia(LocalDateTime.now(ZoneId.of("UTC")));
-        String rountingKey = "projeto-java";
+        String rountingKey = "ocorrencias";
 
         String transactionJson = mapper.writeValueAsString(ocorrenciaConvertida);
 
@@ -92,7 +92,7 @@ public class OcorrenciaController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(value = "/{id}")
-    public OcorrenciaModel updateOcorrenciaFields(@PathVariable Long id,@RequestBody Map<String, Object> fields){
+    public OcorrenciaModel updateOcorrencia(@PathVariable Long id,@RequestBody Map<String, Object> fields){
         return ocorrenciaService.updateOcorrenciaByFields(id,fields);
     }
 }

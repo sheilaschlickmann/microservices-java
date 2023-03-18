@@ -13,7 +13,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue queue() {
-        return new Queue("projeto-java");
+        return new Queue("ocorrencias");
 
     }
 

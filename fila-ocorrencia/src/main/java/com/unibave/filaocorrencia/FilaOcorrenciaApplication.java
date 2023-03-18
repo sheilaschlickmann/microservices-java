@@ -10,7 +10,7 @@ public class FilaOcorrenciaApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(FilaOcorrenciaApplication.class, args);
-		System.out.println("senha: " + new BCryptPasswordEncoder().encode("pamonha"));
+		//System.out.println("senha: " + new BCryptPasswordEncoder().encode("pastel"));
 	}
 
 }
