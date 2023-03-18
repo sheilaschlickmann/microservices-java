@@ -1,2 +1,20 @@
-# microservices-java
-# Jakarta 9
+# Configurações
+
+```python
+Apache TomEE WebProife 9
+
+Java 11 +
+
+OpenJDK 11 +
+
+```
+
+## Configurar TomEE
+
+Configurar TomEE e colocar artefato
+
+## Banco no Arquivo persistence.xml
+
+       <property name="jakarta.persistence.jdbc.user" value="XXXX" /> <!-- DB User -->
+       <property name="jakarta.persistence.jdbc.password" value="XXXX" /> <!-- DB Password -->
+
